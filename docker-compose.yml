@@ -1,0 +1,17 @@
+services:
+  print-relay:
+    image: ghcr.io/formable-io/print-relay:latest
+    container_name: print-relay
+    restart: unless-stopped
+    env_file: .env
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+
+  # Pulls new relay images as they are published and restarts the container.
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --label-enable --cleanup --interval 300
