@@ -30,6 +30,10 @@ Any Linux box with Docker works. A fanless mini PC (N100 class) is more robust t
 Pi with an SD card.
 
 ```bash
+# The image lives in a private GHCR package: log in once with a GitHub PAT that has read:packages
+# (or make the package public under GitHub → Formable-io → Packages and skip this).
+echo "$GHCR_TOKEN" | docker login ghcr.io -u <github-user> --password-stdin
+
 mkdir -p ~/print-relay && cd ~/print-relay
 curl -fsSLO https://raw.githubusercontent.com/Formable-io/print-relay/main/docker-compose.yml
 curl -fsSL  https://raw.githubusercontent.com/Formable-io/print-relay/main/.env.example -o .env
